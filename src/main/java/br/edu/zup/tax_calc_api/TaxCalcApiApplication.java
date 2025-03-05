@@ -8,6 +8,14 @@ public class TaxCalcApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TaxCalcApiApplication.class, args);
+
+        System.out.print(
+				"\n" +
+				"==========================================\n" +
+				"The Tax Calc API Application is running...\n" +
+				"==========================================\n" +
+				"\n"
+		);
 	}
 
 }
