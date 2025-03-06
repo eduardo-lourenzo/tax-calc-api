@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(value = AccessLevel.NONE)
@@ -26,11 +26,11 @@ public class User {
     @NotNull(message = "O papel é obrigatório.")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private RoleEnum roleEnum;
 
-    public User(String username, String password, Role role) {
+    public UserEntity(String username, String password, RoleEnum roleEnum) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roleEnum = roleEnum;
     }
 }
