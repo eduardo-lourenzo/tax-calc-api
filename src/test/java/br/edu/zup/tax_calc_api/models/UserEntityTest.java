@@ -12,7 +12,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UserTest {
+public class UserEntityTest {
     //Regarding the ConstraintViolationException
     private Validator validator;
 
@@ -24,27 +24,27 @@ public class UserTest {
 
     @Test
     void testValidUser() {
-        User user = new User("validUsername", "validPassword", Role.ROLE_USER);
+        UserEntity userEntity = new UserEntity("validUsername", "validPassword", RoleEnum.ROLE_USER);
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
         assertTrue(violations.isEmpty(), "There should be no validation errors for a valid user.");
     }
 
     @Test
     void testValidAdmin() {
-        User user = new User("validUsername", "validPassword", Role.ROLE_ADMIN);
+        UserEntity userEntity = new UserEntity("validUsername", "validPassword", RoleEnum.ROLE_ADMIN);
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
         assertTrue(violations.isEmpty(), "There should be no validation errors for a valid user.");
     }
 
     @Test
     void testUsernameIsBlank() {
-        User user = new User("", "validPassword", Role.ROLE_USER);
+        UserEntity userEntity = new UserEntity("", "validPassword", RoleEnum.ROLE_USER);
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
         assertFalse(violations.isEmpty(), "Username should not be blank.");
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("O nome de usuário é obrigatório.")));
@@ -52,9 +52,9 @@ public class UserTest {
 
     @Test
     void testUsernameIsNull() {
-        User user = new User(null, "validPassword", Role.ROLE_USER);
+        UserEntity userEntity = new UserEntity(null, "validPassword", RoleEnum.ROLE_USER);
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
         assertFalse(violations.isEmpty(), "Username should not be null.");
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("O nome de usuário é obrigatório.")));
@@ -62,9 +62,9 @@ public class UserTest {
 
     @Test
     void testPasswordIsBlank() {
-        User user = new User("validUsername", "", Role.ROLE_USER);
+        UserEntity userEntity = new UserEntity("validUsername", "", RoleEnum.ROLE_USER);
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
         assertFalse(violations.isEmpty(), "Password should not be blank.");
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("A senha é obrigatória.")));
@@ -72,9 +72,9 @@ public class UserTest {
 
     @Test
     void testPasswordIsNull() {
-        User user = new User("validUsername", null, Role.ROLE_USER);
+        UserEntity userEntity = new UserEntity("validUsername", null, RoleEnum.ROLE_USER);
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
         assertFalse(violations.isEmpty(), "Password should not be null.");
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("A senha é obrigatória.")));
@@ -82,9 +82,9 @@ public class UserTest {
 
     @Test
     void testRoleIsNull() {
-        User user = new User("validUsername", "validPassword", null);
+        UserEntity userEntity = new UserEntity("validUsername", "validPassword", null);
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
         assertFalse(violations.isEmpty(), "Role should not be null.");
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("O papel é obrigatório.")));
