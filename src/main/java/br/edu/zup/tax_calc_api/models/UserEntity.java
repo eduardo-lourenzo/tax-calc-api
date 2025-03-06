@@ -26,11 +26,11 @@ public class UserEntity {
     @NotNull(message = "O papel é obrigatório.")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoleEnum roleEnum;
+    private RoleEnum role;
 
-    public UserEntity(String username, String password, RoleEnum roleEnum) {
+    public UserEntity(String username, String password, RoleEnum role) {
         this.username = username;
         this.password = password;
-        this.roleEnum = roleEnum;
+        this.role = role;
     }
 }
