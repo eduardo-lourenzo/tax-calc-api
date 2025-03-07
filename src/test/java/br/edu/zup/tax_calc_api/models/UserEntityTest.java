@@ -24,7 +24,7 @@ public class UserEntityTest {
 
     @Test
     void testValidUser() {
-        UserEntity userEntity = new UserEntity("validUsername", "validPassword", RoleEnum.ROLE_USER);
+        UserEntity userEntity = new UserEntity("validUsername", "validPassword", RoleEnum.USER);
 
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
@@ -33,7 +33,7 @@ public class UserEntityTest {
 
     @Test
     void testValidAdmin() {
-        UserEntity userEntity = new UserEntity("validUsername", "validPassword", RoleEnum.ROLE_ADMIN);
+        UserEntity userEntity = new UserEntity("validUsername", "validPassword", RoleEnum.ADMIN);
 
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
@@ -42,7 +42,7 @@ public class UserEntityTest {
 
     @Test
     void testUsernameIsBlank() {
-        UserEntity userEntity = new UserEntity("", "validPassword", RoleEnum.ROLE_USER);
+        UserEntity userEntity = new UserEntity("", "validPassword", RoleEnum.USER);
 
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
@@ -52,7 +52,7 @@ public class UserEntityTest {
 
     @Test
     void testUsernameIsNull() {
-        UserEntity userEntity = new UserEntity(null, "validPassword", RoleEnum.ROLE_USER);
+        UserEntity userEntity = new UserEntity(null, "validPassword", RoleEnum.USER);
 
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
@@ -62,7 +62,7 @@ public class UserEntityTest {
 
     @Test
     void testPasswordIsBlank() {
-        UserEntity userEntity = new UserEntity("validUsername", "", RoleEnum.ROLE_USER);
+        UserEntity userEntity = new UserEntity("validUsername", "", RoleEnum.USER);
 
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
@@ -72,7 +72,7 @@ public class UserEntityTest {
 
     @Test
     void testPasswordIsNull() {
-        UserEntity userEntity = new UserEntity("validUsername", null, RoleEnum.ROLE_USER);
+        UserEntity userEntity = new UserEntity("validUsername", null, RoleEnum.USER);
 
         Set<ConstraintViolation<UserEntity>> violations = validator.validate(userEntity);
 
