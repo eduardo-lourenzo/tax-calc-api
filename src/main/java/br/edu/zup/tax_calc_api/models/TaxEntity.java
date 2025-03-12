@@ -1,6 +1,7 @@
 package br.edu.zup.tax_calc_api.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -29,9 +30,10 @@ public class TaxEntity {
     @Column(nullable = false, length = 255)
     private String description;
 
-    @Column(nullable = false, precision = 12, scale = 6)
     @NotNull(message = "A alíquota é obrigatória.")
+    @Digits(integer = 6, fraction = 6, message = "Número inválido, máximo 6 inteiros e 6 decimais.")
     @Positive(message = "A alíquota deve ser maior que zero.")
+    @Column(nullable = false, precision = 12, scale = 6)
     private BigDecimal aliquot;
 }
 
