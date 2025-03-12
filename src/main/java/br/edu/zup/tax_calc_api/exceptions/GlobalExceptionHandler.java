@@ -45,4 +45,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleTaxAlreadyExistsException(TaxAlreadyExistsException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
+
+    @ExceptionHandler(TaxNotFoundException.class)
+    public ResponseEntity<String> handleTaxNotFoundException(TaxNotFoundException ex){
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
 }
