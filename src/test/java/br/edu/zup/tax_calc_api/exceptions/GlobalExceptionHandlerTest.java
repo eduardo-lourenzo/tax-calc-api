@@ -63,8 +63,30 @@ class GlobalExceptionHandlerTest {
 
         ResponseEntity<String> response = globalExceptionHandler.handleUserAlreadyExistsException(exception);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).isEqualTo("O usuário já existe.");
+    }
+
+    @Test
+    void shouldHandleTaxAlreadyExistsException() {
+        TaxAlreadyExistsException exception = new TaxAlreadyExistsException("O imposto já existe.");
+
+        ResponseEntity<String> response = globalExceptionHandler.handleTaxAlreadyExistsException(exception);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody()).isEqualTo("O imposto já existe.");
+    }
+
+    @Test
+    void shouldHandleTaxNotFoundException() {
+        TaxNotFoundException exception = new TaxNotFoundException("O imposto não foi encontrado.");
+
+        ResponseEntity<String> response = globalExceptionHandler.handleTaxNotFoundException(exception);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody()).isEqualTo("O imposto não foi encontrado.");
     }
 }
