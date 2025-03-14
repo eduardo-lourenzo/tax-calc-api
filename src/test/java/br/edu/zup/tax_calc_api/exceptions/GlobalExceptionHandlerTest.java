@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -88,5 +89,16 @@ class GlobalExceptionHandlerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).isEqualTo("O imposto não foi encontrado.");
+    }
+
+    @Test
+    void shouldHandleUsernameNotFoundException() {
+        UsernameNotFoundException exception = new UsernameNotFoundException("O nome de usuário testUser não foi encontrado.");
+
+        ResponseEntity<String> response = globalExceptionHandler.handleUsernameNotFoundException(exception);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody()).isEqualTo("O nome de usuário testUser não foi encontrado.");
     }
 }
