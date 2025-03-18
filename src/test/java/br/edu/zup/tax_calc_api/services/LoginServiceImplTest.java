@@ -45,7 +45,7 @@ class LoginServiceImplTest {
         LoginResponseDTO response = loginService.login(loginRequestDTO);
 
         assertThat(response).isNotNull();
-        assertThat(response.getAccessToken()).isEqualTo(token);
+        assertThat(response.getToken()).isEqualTo(token);
         verify(authenticationManager, times(1)).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(jwtTokenProvider, times(1)).generateToken(authentication);
         assertThat(SecurityContextHolder.getContext().getAuthentication()).isEqualTo(authentication);
