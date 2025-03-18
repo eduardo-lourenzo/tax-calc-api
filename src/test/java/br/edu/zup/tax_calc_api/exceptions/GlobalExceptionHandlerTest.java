@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -100,5 +101,16 @@ class GlobalExceptionHandlerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).isEqualTo("O nome de usuário testUser não foi encontrado.");
+    }
+
+    @Test
+    void shouldHandleAuthenticationException() {
+        AuthenticationException exception = new AuthenticationException("Falha na autenticação.") {};
+
+        ResponseEntity<String> response = globalExceptionHandler.handleAuthenticationException(exception);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody()).isEqualTo("A autenticação falhou: Falha na autenticação.");
     }
 }
