@@ -6,6 +6,7 @@ import br.edu.zup.tax_calc_api.services.TaxService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class TaxController {
         return ResponseEntity.ok().body(taxService.getAllTax());
     }
 
-    // todo @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TaxEntity> createTax(@Valid @RequestBody TaxRequestDTO taxRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taxService.createTax(taxRequestDTO));
@@ -35,7 +36,7 @@ public class TaxController {
         return ResponseEntity.ok().body(taxService.getTaxById(id));
     }
 
-    // todo @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTax(@PathVariable Long id) {
         taxService.deleteTax(id);
