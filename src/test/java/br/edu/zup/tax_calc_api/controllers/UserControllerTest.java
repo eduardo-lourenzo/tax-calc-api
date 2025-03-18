@@ -1,8 +1,11 @@
 package br.edu.zup.tax_calc_api.controllers;
 
+import br.edu.zup.tax_calc_api.dtos.LoginRequestDTO;
+import br.edu.zup.tax_calc_api.dtos.LoginResponseDTO;
 import br.edu.zup.tax_calc_api.dtos.RegisterRequestDTO;
 import br.edu.zup.tax_calc_api.dtos.RegisterResponseDTO;
 import br.edu.zup.tax_calc_api.models.RoleEnum;
+import br.edu.zup.tax_calc_api.services.LoginService;
 import br.edu.zup.tax_calc_api.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +19,14 @@ import static org.mockito.ArgumentMatchers.any;
 class UserControllerTest {
 
     private UserService userService;
+    private LoginService loginService;
     private UserController userController;
 
     @BeforeEach
     void setUp() {
         userService = Mockito.mock(UserService.class);
-        userController = new UserController(userService);
+        loginService = Mockito.mock(LoginService.class);
+        userController = new UserController(userService, loginService);
     }
 
     @Test
@@ -39,5 +44,21 @@ class UserControllerTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(responseDTO, response.getBody());
+    }
+
+    @Test
+    void testLogin() {
+        LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
+        loginRequestDTO.setUsername("testUser");
+        loginRequestDTO.setPassword("password123");
+
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO("mocked-jwt-token");
+
+        Mockito.when(loginService.login(any(LoginRequestDTO.class))).thenReturn(loginResponseDTO);
+
+        ResponseEntity<LoginResponseDTO> response = userController.login(loginRequestDTO);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(loginResponseDTO, response.getBody());
     }
 }
