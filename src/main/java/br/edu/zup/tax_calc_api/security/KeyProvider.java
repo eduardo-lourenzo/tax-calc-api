@@ -8,9 +8,13 @@ import java.security.Key;
 
 @Component
 public class KeyProvider {
-    private static final String SECRET_KEY = System.getenv("JWT_SECRET_KEY");
+    private  final String secretKey;
+
+    public KeyProvider() {
+        this.secretKey = System.getenv("JWT_SECRET_KEY");
+    }
 
     public Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
     }
 }
