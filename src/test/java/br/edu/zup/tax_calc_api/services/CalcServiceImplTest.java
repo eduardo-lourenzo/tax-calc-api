@@ -38,7 +38,7 @@ class CalcServiceImplTest {
         BigDecimal aliquot = new BigDecimal("10.00");
 
         TaxEntity taxEntity = new TaxEntity();
-        ReflectionTestUtils.setField(taxEntity, "id", typeTaxId); // Usando ReflectionTestUtils
+        ReflectionTestUtils.setField(taxEntity, "id", typeTaxId);
         taxEntity.setName("Imposto Teste");
         taxEntity.setAliquot(aliquot);
 

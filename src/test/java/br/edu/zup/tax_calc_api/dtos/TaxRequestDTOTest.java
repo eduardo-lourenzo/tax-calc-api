@@ -63,7 +63,7 @@ class TaxRequestDTOTest {
         TaxRequestDTO taxRequestDTO = new TaxRequestDTO();
         taxRequestDTO.setName("Imposto de Renda");
         taxRequestDTO.setDescription("Imposto sobre a renda de pessoas físicas e jurídicas.");
-        taxRequestDTO.setAliquot(new BigDecimal("-5.25")); // Alíquota negativa
+        taxRequestDTO.setAliquot(new BigDecimal("-5.25"));
 
         Set<ConstraintViolation<TaxRequestDTO>> violations = validator.validate(taxRequestDTO);
         assertEquals(1, violations.size());
@@ -87,7 +87,7 @@ class TaxRequestDTOTest {
         TaxRequestDTO taxRequestDTO = new TaxRequestDTO();
         taxRequestDTO.setName("Imposto de Renda");
         taxRequestDTO.setDescription("Imposto sobre a renda de pessoas físicas e jurídicas.");
-        taxRequestDTO.setAliquot(new BigDecimal("123456.0")); // Máximo permitido para inteiros
+        taxRequestDTO.setAliquot(new BigDecimal("123456.0"));
 
         Set<ConstraintViolation<TaxRequestDTO>> violations = validator.validate(taxRequestDTO);
         assertTrue(violations.isEmpty(), "A alíquota com o máximo de inteiros deve ser válida.");
@@ -98,7 +98,7 @@ class TaxRequestDTOTest {
         TaxRequestDTO taxRequestDTO = new TaxRequestDTO();
         taxRequestDTO.setName("Imposto de Renda");
         taxRequestDTO.setDescription("Imposto sobre a renda de pessoas físicas e jurídicas.");
-        taxRequestDTO.setAliquot(new BigDecimal("0.123456")); // Máximo permitido para decimais
+        taxRequestDTO.setAliquot(new BigDecimal("0.123456"));
 
         Set<ConstraintViolation<TaxRequestDTO>> violations = validator.validate(taxRequestDTO);
         assertTrue(violations.isEmpty(), "A alíquota com o máximo de decimais deve ser válida.");
@@ -109,7 +109,7 @@ class TaxRequestDTOTest {
         TaxRequestDTO taxRequestDTO = new TaxRequestDTO();
         taxRequestDTO.setName("Imposto de Renda");
         taxRequestDTO.setDescription("Imposto sobre a renda de pessoas físicas e jurídicas.");
-        taxRequestDTO.setAliquot(new BigDecimal("1234567.123456")); // Número inválido (mais de 6 inteiros)
+        taxRequestDTO.setAliquot(new BigDecimal("1234567.123456"));
 
         Set<ConstraintViolation<TaxRequestDTO>> violations = validator.validate(taxRequestDTO);
         assertEquals(1, violations.size());
@@ -121,7 +121,7 @@ class TaxRequestDTOTest {
         TaxRequestDTO taxRequestDTO = new TaxRequestDTO();
         taxRequestDTO.setName("Imposto de Renda");
         taxRequestDTO.setDescription("Imposto sobre a renda de pessoas físicas e jurídicas.");
-        taxRequestDTO.setAliquot(new BigDecimal("123456.1234567")); // Número inválido (mais de 6 decimais)
+        taxRequestDTO.setAliquot(new BigDecimal("123456.1234567"));
 
         Set<ConstraintViolation<TaxRequestDTO>> violations = validator.validate(taxRequestDTO);
         assertEquals(1, violations.size());

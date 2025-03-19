@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserEntityTest {
-    //Regarding the ConstraintViolationException
     private Validator validator;
 
     @BeforeEach
