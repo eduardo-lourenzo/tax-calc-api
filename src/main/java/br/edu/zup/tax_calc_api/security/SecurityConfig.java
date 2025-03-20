@@ -33,10 +33,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/**").permitAll()
-                        .requestMatchers("/tipos/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/calculo/**").hasAnyRole("ADMIN")
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/calculo/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/tipos/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 ).exceptionHandling(ex -> ex
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
