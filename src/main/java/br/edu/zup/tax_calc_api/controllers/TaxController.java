@@ -3,6 +3,9 @@ package br.edu.zup.tax_calc_api.controllers;
 import br.edu.zup.tax_calc_api.dtos.TaxRequestDTO;
 import br.edu.zup.tax_calc_api.models.TaxEntity;
 import br.edu.zup.tax_calc_api.services.TaxService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tipos")
+@SecurityRequirement(name = "bearerAuth")
 public class TaxController {
     private final TaxService taxService;
 
