@@ -75,7 +75,7 @@ mvn clean install
 3. ```bash
    sql CREATE DATABASE tax_calc;
    ```
-Configure as variáveis de ambiente necessárias (veja a seção Variáveis de Ambiente).
+Configure as variáveis de ambiente necessárias (veja a seção a seguir Variáveis de Ambiente).
 
 ---
 ## Variáveis de Ambiente
@@ -119,7 +119,6 @@ Agora, você pode interagir com os dados utilizando os endpoints disponíveis.
 | GET | `/taxes` | Retorna todos os impostos. | 
 | POST | `/taxes` | Cria um novo imposto. | 
 | GET | `/taxes/{id}` | Retorna um imposto pelo ID. | 
-| PUT | `/taxes/{id}` | Atualiza um imposto pelo ID. | 
 | DELETE | `/taxes/{id}` | Remove um imposto pelo ID. | 
 
 ### **Endpoints de Cálculo**
