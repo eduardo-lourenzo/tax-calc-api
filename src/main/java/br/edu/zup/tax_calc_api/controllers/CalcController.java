@@ -3,6 +3,7 @@ package br.edu.zup.tax_calc_api.controllers;
 import br.edu.zup.tax_calc_api.dtos.CalcRequestDTO;
 import br.edu.zup.tax_calc_api.dtos.CalcResponseDTO;
 import br.edu.zup.tax_calc_api.services.CalcService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/calculo")
 @PreAuthorize("hasRole('ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 public class CalcController {
     private final CalcService calcService;
 
