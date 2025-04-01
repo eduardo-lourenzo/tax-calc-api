@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  tax-calc-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file: 
+      - .env # Especifica o arquivo .env para carregar as variáveis de ambiente
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    image: postgres:17
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: tax_calc
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
