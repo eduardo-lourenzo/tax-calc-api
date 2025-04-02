@@ -27,9 +27,9 @@ services:
     container_name: psql17
     
     environment:
-      POSTGRES_DB: tax_calc
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: tax_calc_db
+      POSTGRES_USER: manager
+      POSTGRES_PASSWORD: admin123
     
     ports:
       - "5432:5432"
