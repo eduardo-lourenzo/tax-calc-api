@@ -1,28 +1,41 @@
 version: '3.8'
 services:
   tax-calc-api:
+    container_name: taxAPI
+    
     build:
       context: .
       dockerfile: Dockerfile
+
     ports:
       - "8080:8080"
-    env_file: 
-      - .env # Especifica o arquivo .env para carregar as variáveis de ambiente
+    
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: tax_calc_db
+      DB_USERNAME: manager
+      DB_PASSWORD: admin123
+      JWT_SECRET_KEY: VGVzdGUgVGVzdGUgVGVzdGUgVGVzdGUgVGVzdGUgVGVzdGUgVGVzdGU=
+
     depends_on:
       - db
-    restart: on-failure
 
   db:
     image: postgres:17
-    container_name: postgres-db
+    
+    container_name: psql17
+    
     environment:
       POSTGRES_DB: tax_calc
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
+    
     ports:
       - "5432:5432"
+    
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/postgres_data
 
 volumes:
   postgres_data:
